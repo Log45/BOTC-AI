@@ -4,7 +4,8 @@ class Townsfolk():
              "Investigator": "You start knowing that 1 of 2 players is a particular Minion.",
              "Chef": "You start knowing how many pairs of evil players there are.",
              "Empath": "Each night, you learn how many of your 2 alive neighbours are evil.",
-             "Fortune Teller": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you."}
+             "Fortune Teller": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+             }
     def __init__(self, type) -> None:
         pass
 
