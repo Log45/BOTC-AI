@@ -3,12 +3,38 @@ Washerwoman,You start knowing that 1 of 2 players is a particular Townsfolk.
 Librarian,You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)
 Investigator, You start knowing that 1 of 2 players is a particular Minion.
 Chef,You start knowing how many pairs of evil players there are.
-Empath,Each night-you learn how many of your 2 alive neighbours are evil.
-Fortune Teller,Each night-choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.
-Undertaker,Each night*-you learn which character died by execution today.
-Monk,Each night*-choose a player (not yourself): they are safe from the Demon tonight.
+Empath,Each night- you learn how many of your 2 alive neighbours are evil.
+Fortune Teller,Each night- choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.
+Undertaker,Each night*- you learn which character died by execution today.
+Monk,Each night*- choose a player (not yourself): they are safe from the Demon tonight.
 Ravenkeeper,If you die at night you are woken to choose a player: you learn their character.
-Virgin,The 1st time you are nominated-if the nominator is a Townsfolk-they are executed immediately.
-Slayer,Once per game-during the day-publicly choose a player: if they are the Demon-they die.
+Virgin,The 1st time you are nominated- if the nominator is a Townsfolk- they are executed immediately.
+Slayer,Once per game-during the day- publicly choose a player: if they are the Demon- they die.
 Soldier,You are safe from the Demon.
-Mayor,If only 3 players live & no execution occurs-your team wins. If you die at night-another player might die instead.
+Mayor,If only 3 players live & no execution occurs- your team wins. If you die at night-another player might die instead.
+Clockmaker,You start knowing how many steps from the Demon to its nearest Minion.
+Dreamer ,Each night- choose a player (not yourself or Travellers): you learn 1 good & 1 evil character- 1 of which is correct.
+Snake Charmer,Each night- choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.
+Mathematician,Each night- you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.
+Flowergirl,Each night*- you learn if a Demon voted today. 
+Town Crier,Each night*- you learn if a Minion nominated today.
+Oracle,Each night*- you learn how many dead players are evil.
+Savant,Each day- you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false. 
+Seamstress,Once per game- at night- choose 2 players (not yourself): you learn if they are the same alignment.
+Philosopher,"Once per game- at night- choose a good character: gain that ability. If this character is in play, they are drunk."
+Artist,Once per game- during the day- privately ask the Storyteller any yes/no question.
+Juggler,On your 1st day- publicly guess up to 5 players' characters. That night- you learn how many you got correct. 
+Sage,If the Demon kills you- you learn that it is 1 of 2 players.
+Grandmother,You start knowing a good player & their character. If the Demon kills them- you die too.
+Sailor,Each night- choose an alive player: either you or they are drunk until dusk. You can't die.
+Chambermaid,Each night- choose 2 alive players (not yourself): you learn how many woke tonight due to their ability. 
+Exorcist,"Each night*- choose a player (different to last night): the Dmeon, if chosen, learns who you are then doesn't wake tonight."
+Innkeeper,Each night*- choose 2 players: they can not die tonight- but 1 is drunk until dusk.
+Gambler,Each night*- choose a player & guess their character: if you guess wrong- you die.
+Gossip,Each day- you may make a public statement. Tonight- if it was true- a player dies. 
+Courtier,Once per game- at night- choose a character: they are drunk for 3 nights & 3 days. 
+Professor,Once per game- at night*- choose a dead player: if they are a Townsfolk- they are resurrected.
+Minstrel,When a Minion dies by execution- all other players (except Travellers) are drunk until dusk tomorrow.
+Tea Lady,If both your alive neighbours are good- they can't die.
+Pacifist,Executed good players might not die.
+Fool,The first time you die- you don't.
