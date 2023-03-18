@@ -13,6 +13,10 @@ Another important thing to figure out is how to train the model.
     What data can we give it to train it to make correct choices in rulings and create valid responses to players' questions?
     ***It may be best to hard code obviously known game mechanics and just use a generative model to fabricate responses to players***
     
+**We could start by designing the game first (an app that would allow a human storyteller to control the game
+from a website rather than the grimoire and have players play on a server) and then when the game is complete and 
+in a functioning state, train the AI based on history of games ran by people and by games of NoRollsBarred on Youtube.
+
 
 Sources:
 
