@@ -140,9 +140,15 @@ class Game():
     def __init__(self, playercount:int, players:list) -> None:
         pass
 
-tf = Townsfolk("Washerwoman")
-print(tf.type, tf.text)
-p1 = Player("Logan", "Good", tf)
-p1.kill()
-p1.dead_vote()
-print(p1)
+def main():
+    # When players join the game, they need to fill out an entry box with their name, which will be added
+    # to a list of players which will be used to randomize roles
+    tf = Townsfolk("Washerwoman")
+    print(tf.type, tf.text)
+    p1 = Player("Logan", "Good", tf)
+    p1.kill()
+    p1.dead_vote()
+    print(p1)
+
+if __name__ == "__main__":
+    main()
