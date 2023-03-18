@@ -17,7 +17,7 @@ Dreamer ,Each night- choose a player (not yourself or Travellers): you learn 1 g
 Snake Charmer,Each night- choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.
 Mathematician,Each night- you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.
 Flowergirl,Each night*- you learn if a Demon voted today. 
-Town Crier,Each night*- you learn if a Minion nominated today.
+Town_Crier,Each night*- you learn if a Minion nominated today.
 Oracle,Each night*- you learn how many dead players are evil.
 Savant,Each day- you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false. 
 Seamstress,Once per game- at night- choose 2 players (not yourself): you learn if they are the same alignment.
@@ -35,6 +35,6 @@ Gossip,Each day- you may make a public statement. Tonight- if it was true- a pla
 Courtier,Once per game- at night- choose a character: they are drunk for 3 nights & 3 days. 
 Professor,Once per game- at night*- choose a dead player: if they are a Townsfolk- they are resurrected.
 Minstrel,When a Minion dies by execution- all other players (except Travellers) are drunk until dusk tomorrow.
-Tea Lady,If both your alive neighbours are good- they can't die.
+Tea_Lady,If both your alive neighbours are good- they can't die.
 Pacifist,Executed good players might not die.
 Fool,The first time you die- you don't.

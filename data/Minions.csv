@@ -1,10 +1,10 @@
 Role,Description
-Godfather,You start knowing which Outsiders are in play. If 1 died today- choose a player tongiht: they die. [-1 or +1 Outsider]
+Godfather,You start knowing which Outsiders are in play. If 1 died today- choose a player tonight: they die. [-1 or +1 Outsider]
 Devil's Advocate,Each night- choose a living player (different to last night): if executed tomorrow- they don't die. 
 Assassin,Once per game- at night*- choose a player: they die- even if for some reason they could not.
 Mastermind,If the Demon dies by execution (ending the game)- play for 1 more day. If a player is then executed- their team loses.
 Cerenovus,Each night- choose a player & a good character: they are mad about being this character tomorrow- or might be executed.
-Evil Twin,You & an opposing player know each other. If the good player is executed- evil wins. Good can't win if you both live.
+Evil_Twin,You & an opposing player know each other. If the good player is executed- evil wins. Good can't win if you both live.
 Pit-Hag,Each night*- choose a player & a character they become (if not-in-play). If a Demon is made- deaths tonight are arbitrary. 
 Witch,Each night- choose a player: if they nominate tomorrow- they die. If just 3 players live- you lose this ability.
 Poisoner,Each night- choose a player: they are poisoned tonight and tomorrow day.
