@@ -16,6 +16,8 @@ class Townsfolk():
         else:
             print("That character does not exist...")
             raise TypeError
+    def __str__(self) -> str:
+        return f"Role: {self.type}"
         
 class Outsider():
     types = {}
@@ -35,6 +37,8 @@ class Outsider():
         else:
             print("That character does not exist...")
             raise TypeError
+    def __str__(self) -> str:
+        return f"Role: {self.type}"
         
 class Minion():
     types = {}
@@ -54,6 +58,8 @@ class Minion():
         else:
             print("That character does not exist...")
             raise TypeError
+    def __str__(self) -> str:
+        return f"Role: {self.type}"
         
 class Demon():
     types = {}
@@ -73,6 +79,8 @@ class Demon():
         else:
             print("That character does not exist...")
             raise TypeError
+    def __str__(self) -> str:
+        return f"Role: {self.type}"
         
 class Traveler():
     types = {}
@@ -94,10 +102,39 @@ class Traveler():
             raise TypeError
         
 class Player():
-    def __init__(self, alignment, role:object) -> None:
+    def __init__(self, name:str, alignment:str, role:object) -> None:
+        self.name = name
         self.alignment = alignment
         self.role = role
-        pass
+        self.alive = True
+        self.deadvote = True
+    
+    def swap_alignment(self):
+        if self.alignment == "Good":
+            self.alignment = "Evil"
+        else:
+            self.alignment = "Good"
+
+    def kill(self):
+        self.alive = False
+
+    def resurrect(self):
+        self.alive = True
+
+    def is_alive(self) -> bool:
+        return self.alive
+    
+    def dead_vote(self):
+        self.deadvote = False
+
+    def has_vote(self) -> bool:
+        if self.is_alive():
+            return True
+        else:
+            return self.deadvote
+
+    def __str__(self) -> str:
+        return f"Player: {self.name} | {self.role.__str__()} | Alignment: {self.alignment} | Status: {'Alive' if self.is_alive() else 'Dead'} | DeadVote: {'Saved' if self.has_vote() else 'Used'}"
 
 class Game():
     def __init__(self, playercount:int, players:list) -> None:
@@ -105,3 +142,7 @@ class Game():
 
 tf = Townsfolk("Washerwoman")
 print(tf.type, tf.text)
+p1 = Player("Logan", "Good", tf)
+p1.kill()
+p1.dead_vote()
+print(p1)
