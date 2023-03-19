@@ -217,13 +217,9 @@ class Game():
             drunk_character = None
         while len(role_list) > 0:
             i = random.randint(0, len(role_list)-1)
-            print(i)
             role = role_list[i]
-            print(role)
             role_list.remove(role)
             j = random.randint(0, len(players)-1)
-            print(j)
-            print(players[j])
             if role in Townsfolk.types:
                 self.player_list.append(Player(players[j], "Good", Townsfolk(role), drunk_character))
                 print("town added")
