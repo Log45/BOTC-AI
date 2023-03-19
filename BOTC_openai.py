@@ -3,7 +3,7 @@ import sounddevice as sd
 from scipy.io.wavfile import write
 
 def record_question():
-    fs = 44100  # Sample rate
+    fs = 48000  # Sample rate
     seconds = int(input("How long do you want to ask your question? (In seconds): ").strip())  # Duration of recording
     print("Beginning Recording...")
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
