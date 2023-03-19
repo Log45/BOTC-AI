@@ -17,9 +17,16 @@ Another important thing to figure out is how to train the model.
 from a website rather than the grimoire and have players play on a server) and then when the game is complete and 
 in a functioning state, train the AI based on history of games ran by people and by games of NoRollsBarred on Youtube.
 
+**Implement the game creation into a Flask webapp?
+    - create a map: town hall in the center (the main circle)
+    - different areas on the map like an inn, a hospital, a church, a college etc. where people can have
+      private conversations. (icons will show around the areas so people know who is having private convos)
+
+Use Pygame to create the GUI for the game and host it on a server (follow freeCodeCamp's tutorial on YouTube)
 
 Sources:
 
 https://realpython.com/playing-and-recording-sound-python/
 https://github.com/openai/openai-python/blob/main/README.md
 https://wiki.bloodontheclocktower.com/
+https://youtu.be/McoDjOCb27o

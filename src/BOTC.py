@@ -250,6 +250,5 @@ def main():
             player_list.append(player_name)
     game = Game(player_list, "Sects and Violets.json")
 
-
 if __name__ == "__main__":
     main()
