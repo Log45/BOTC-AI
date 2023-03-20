@@ -146,7 +146,7 @@ class Player():
         return self.poisoned
     
     def wake_up(self):
-        print("Wake up")
+        print("Wake up " + self.__str__())
         pass
 
     def __str__(self) -> str:
@@ -266,15 +266,9 @@ class Game():
             players.remove(players[j])
     
     def night_1(self):
-        print(self.first_night_order, self.other_night_order)
-        print(self.player_map)
-        print(self.role_map)
         for role in self.first_night_order:
             if role in self.active_roles:
-                print(role)
                 player = self.role_map[role]
-                print(player)
-                print(self.player_map[player])
                 self.player_map[player].wake_up()
 
 def main():
@@ -296,8 +290,6 @@ def test():
         players = ["Logan", "Jason", "Ada", "Ata", "Joe", "Matt", "Emma", "Jeremy", "Darwin", "Dani", "Zach"]
         game = Game(players, "Sects and Violets.json")
         game.night_1()
-        for player in game.player_list:
-            print(player)
 
 if __name__ == "__main__":
     #main()
