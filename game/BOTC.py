@@ -144,6 +144,10 @@ class Player():
         
     def is_poisoned(self) -> bool:
         return self.poisoned
+    
+    def wake_up(self):
+        print("Wake up")
+        pass
 
     def __str__(self) -> str:
         return f"Player: {self.name} | {self.role.__str__()} | Alignment: {self.alignment} | Status: {'Alive' if self.is_alive() else 'Dead'} | DeadVote: {'Saved' if self.has_vote() else 'Used'}"
@@ -170,6 +174,16 @@ class Game():
                     pass
                 else:
                     roles_list.append(i["id"])
+        self.first_night_order = []
+        self.other_night_order = []
+        with open("nightsheet.json") as file:
+            orders = json.load(file)
+            for i in orders["firstnight"]:
+                if i in roles_list or i == "MINION_INFO" or i == "DEMON_INFO" or i == "DAWN":
+                    self.first_night_order.append(i) 
+            for i in orders["othernight"] or i == "DUSK" or i == "DAWN":
+                if i in roles_list:
+                    self.other_night_order.append(i)
         self.script = roles_list
         self.name_list = []
         for player in players:
@@ -185,25 +199,32 @@ class Game():
         role_list.append(input("Enter your demon (must be all lowercase e.g: fang_gu): "))
         if "fang_gu" in role_list:
             self.outsider_count+=1
+            self.town_count-=1
         elif "vigormortis" in role_list and self.outsider_count>0:
             self.outsider_count-=1
+            self.town_count+=1
         for i in range(self.minion_count):
             role_list.append(input("Enter a new Minion (no repeats and must be lowercase e.g: pit-hag or evil_twin): "))
-        if "baron" in role_list:
+        if "baron" in role_list and self.outsider_count>0:
             self.outsider_count+=2
+            self.town_count-=2
         if "godfather" in role_list:
             choice = input("Choose to add or subtract an outsider (+ or -): ")
             if choice == "+":
                 self.outsider_count+=1
-            elif choice == "-":
+                self.town_count-=1
+            elif choice == "-" and self.outsider_count>0:
                 self.outsider_count-=1
+                self.town_count+=1
             else:
                 print("I'll give you one more chance!")
                 choice = input("you MUST enter either '+' or '-'")
                 if choice == "+":
                     self.outsider_count+=1
-                elif choice == "-":
+                    self.town_count-=1
+                elif choice == "-" and self.outsider_count>0:
                     self.outsider_count-=1
+                    self.town_count+=1
                 else:
                     print("You suck")
                     raise ValueError
@@ -215,24 +236,46 @@ class Game():
             drunk_character = input("Enter townsfolk role to give the drunk (must be lowercase and not in play): ")
         else: 
             drunk_character = None
+        self.active_roles = []
+        self.role_map = {}
+        self.player_map = {}
+        for i in role_list:
+            self.active_roles.append(i)
         while len(role_list) > 0:
             i = random.randint(0, len(role_list)-1)
             role = role_list[i]
             role_list.remove(role)
             j = random.randint(0, len(players)-1)
+            self.role_map[role] = players[j]
             if role in Townsfolk.types:
-                self.player_list.append(Player(players[j], "Good", Townsfolk(role), drunk_character))
+                self.player_map[players[j]] = Player(players[j], "Good", Townsfolk(role), drunk_character)
+                self.player_list.append(self.player_map[players[j]])    
                 print("town added")
             elif role in Outsider.types:
-                self.player_list.append(Player(players[j], "Good", Outsider(role), drunk_character))
+                self.player_map[players[j]] = Player(players[j], "Good", Outsider(role), drunk_character)
+                self.player_list.append(self.player_map[players[j]])    
                 print("outsider added")
             elif role in Minion.types:
-                self.player_list.append(Player(players[j], "Evil", Minion(role), drunk_character))
+                self.player_map[players[j]] = Player(players[j], "Evil", Minion(role), drunk_character)
+                self.player_list.append(self.player_map[players[j]])    
                 print("minion added")
             elif role in Demon.types:
-                self.player_list.append(Player(players[j], "Evil", Demon(role), drunk_character))
+                self.player_map[players[j]] = Player(players[j], "Evil", Demon(role), drunk_character)
+                self.player_list.append(self.player_map[players[j]])    
                 print("demon added")
             players.remove(players[j])
+    
+    def night_1(self):
+        print(self.first_night_order, self.other_night_order)
+        print(self.player_map)
+        print(self.role_map)
+        for role in self.first_night_order:
+            if role in self.active_roles:
+                print(role)
+                player = self.role_map[role]
+                print(player)
+                print(self.player_map[player])
+                self.player_map[player].wake_up()
 
 def main():
     # When players join the game, they need to fill out an entry box with their name, which will be added
@@ -245,6 +288,17 @@ def main():
         else:
             player_list.append(player_name)
     game = Game(player_list, "Sects and Violets.json")
+    
+    for player in game.player_list:
+        print(player)
+
+def test():
+        players = ["Logan", "Jason", "Ada", "Ata", "Joe", "Matt", "Emma", "Jeremy", "Darwin", "Dani", "Zach"]
+        game = Game(players, "Sects and Violets.json")
+        game.night_1()
+        for player in game.player_list:
+            print(player)
 
 if __name__ == "__main__":
-    main()
+    #main()
+    test()

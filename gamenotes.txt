@@ -29,4 +29,4 @@ Sources:
 https://realpython.com/playing-and-recording-sound-python/
 https://github.com/openai/openai-python/blob/main/README.md
 https://wiki.bloodontheclocktower.com/
-https://youtu.be/McoDjOCb27o
+https://www.youtube.com/watch?v=McoDjOCb2Zo&t=7s

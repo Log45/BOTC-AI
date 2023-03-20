@@ -13,8 +13,8 @@ Slayer,Once per game-during the day- publicly choose a player: if they are the D
 Soldier,You are safe from the Demon.
 Mayor,If only 3 players live & no execution occurs- your team wins. If you die at night-another player might die instead.
 Clockmaker,You start knowing how many steps from the Demon to its nearest Minion.
-Dreamer ,Each night- choose a player (not yourself or Travellers): you learn 1 good & 1 evil character- 1 of which is correct.
-Snake Charmer,Each night- choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.
+Dreamer,Each night- choose a player (not yourself or Travellers): you learn 1 good & 1 evil character- 1 of which is correct.
+Snake_Charmer,Each night- choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.
 Mathematician,Each night- you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.
 Flowergirl,Each night*- you learn if a Demon voted today. 
 Town_Crier,Each night*- you learn if a Minion nominated today.
