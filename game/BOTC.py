@@ -112,6 +112,8 @@ class Player():
         self.alive = True
         self.deadvote = True
         self.poisoned = False
+        self.mad = False
+        self.mad_role = None
         drunk = False if role.type != "drunk" else True
         self.displayed_role = drunk_role if drunk else role
     
@@ -136,6 +138,16 @@ class Player():
     def dead_vote(self):
         self.deadvote = False
 
+    def make_mad(self, mad_role = None):
+        self.mad = True
+        self.mad_role = mad_role
+
+    def display_mad_role(self):
+        print(self.mad_role)
+
+    def is_mad(self):
+        return self.mad
+
     def has_vote(self) -> bool:
         if self.is_alive():
             return True
@@ -145,12 +157,24 @@ class Player():
     def is_poisoned(self) -> bool:
         return self.poisoned
     
-    def wake_up(self):
+    def wake_up(self, game):
         print("Wake up " + self.__str__())
+        players:list = game.name_list
+        alive_players = []
+        for name in players:
+            if game.player_map[name].is_alive():
+                alive_players.append(name)
+        if "choose a player":
+            pass
         pass
 
     def __str__(self) -> str:
         return f"Player: {self.name} | {self.role.__str__()} | Alignment: {self.alignment} | Status: {'Alive' if self.is_alive() else 'Dead'} | DeadVote: {'Saved' if self.has_vote() else 'Used'}"
+
+
+class StoryTeller():
+    def __init__(self, game) -> None:
+        pass
 
 class Game():
     team_map = {# player_count: (town, outsider, minion, demon)
@@ -269,7 +293,18 @@ class Game():
         for role in self.first_night_order:
             if role in self.active_roles:
                 player = self.role_map[role]
-                self.player_map[player].wake_up()
+                self.player_map[player].wake_up(self)
+
+    def play_day(self):
+        
+        pass
+
+    def other_nights(self):
+        for role in self.other_night_order:
+            if role in self.active_roles:
+                player = self.role_map[role]
+                if self.player_map[player].is_alive():
+                    self.player_map[player].wake_up(self)
 
 def main():
     # When players join the game, they need to fill out an entry box with their name, which will be added
@@ -281,14 +316,14 @@ def main():
             break
         else:
             player_list.append(player_name)
-    game = Game(player_list, "Sects and Violets.json")
+    game = Game(player_list, "scripts/Sects and Violets.json")
     
     for player in game.player_list:
         print(player)
 
 def test():
         players = ["Logan", "Jason", "Ada", "Ata", "Joe", "Matt", "Emma", "Jeremy", "Darwin", "Dani", "Zach"]
-        game = Game(players, "Sects and Violets.json")
+        game = Game(players, "scripts/Sects and Violets.json")
         game.night_1()
 
 if __name__ == "__main__":
