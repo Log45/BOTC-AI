@@ -4,8 +4,8 @@ import pygame
 
 class Townsfolk():
     types = {}
-    with open("data/Townsfolks.csv") as file:
-        for line in file:
+    with open("data/Townsfolks.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -25,8 +25,8 @@ class Townsfolk():
         
 class Outsider():
     types = {}
-    with open("data/Outsiders.csv") as file:
-        for line in file:
+    with open("data/Outsiders.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -46,8 +46,8 @@ class Outsider():
         
 class Minion():
     types = {}
-    with open("data/Minions.csv") as file:
-        for line in file:
+    with open("data/Minions.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -67,8 +67,8 @@ class Minion():
         
 class Demon():
     types = {}
-    with open("data/Demons.csv") as file:
-        for line in file:
+    with open("data/Demons.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -88,8 +88,8 @@ class Demon():
         
 class Traveler():
     types = {}
-    with open("data/Travelers.csv") as file:
-        for line in file:
+    with open("data/Travelers.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -158,13 +158,27 @@ class Player():
     def is_poisoned(self) -> bool:
         return self.poisoned
     
-    def wake_up(self, game):
+    def wake_up(self, game, first=False):
         print("Wake up " + self.__str__())
         players:list = game.name_list
         alive_players = []
+        demon_list = []
+        minion_list = []
         for name in players:
             if game.player_map[name].is_alive():
                 alive_players.append(name)
+            if game.player_map[name].role.type in Demon.types:
+                demon_list.append(game.player_map[name])
+            elif game.player_map[name].role.type in Minion.types:
+                minion_list.append(game.player_map[name])
+        if(first):
+            if(self.role.type in Demon.types):
+                print("These are your minions:")
+                for minion in minion_list:
+                    print(minion.name)
+            elif(self.role.type in Minion.types):
+                print("This is your demon:")
+                print(demon_list[0].name)
         if "choose a player":
             pass
         pass
@@ -291,16 +305,30 @@ class Game():
             players.remove(players[j])
     
     def night_1(self):
+        self.night = 1
+        print("---Night 1---")
         for role in self.first_night_order:
             if role in self.active_roles:
                 player = self.role_map[role]
                 self.player_map[player].wake_up(self)
+            elif role == "MINION_INFO":
+                for r in self.active_roles:
+                    if r in Minion.types:
+                        player = self.role_map[r]
+                        self.player_map[player].wake_up(self, True)
+            elif role == "DEMON_INFO":
+                for r in self.active_roles:
+                    if r in Demon.types:
+                        player = self.role_map[r]
+                        self.player_map[player].wake_up(self, True)
+                
 
     def play_day(self):
-        
         pass
 
     def other_nights(self):
+        self.night+=1
+        print(f"---Night {self.night}---")
         for role in self.other_night_order:
             if role in self.active_roles:
                 player = self.role_map[role]
