@@ -179,9 +179,21 @@ class Player():
             elif(self.role.type in Minion.types):
                 print("This is your demon:")
                 print(demon_list[0].name)
-        if "choose a player":
-            pass
-        pass
+        else:
+            if "choose a player" in self.role.text and "*" not in self.role.text:
+                choice = input(f"Choose a player: {set(players)} ")
+                print(self.name + " chose " + choice)
+            elif "choose 2 players" in self.role.text and "*" not in self.role.text:
+                choice_1 = input(f"Choose a player: {set(players)} ")
+                choice_2 = input(f"Choose a player: {set(players).difference(choice_1)} ")
+                print(self.name + " chose " + choice_1 + " and " + choice_2)
+            elif "choose an alive player" in self.role.text and "*" not in self.role.text:
+                choice = input(f"Choose an alive player: {set(alive_players)} ")
+                print(self.name + " chose " + choice)
+            elif "choose 2 alive players" in self.role.text and "*" not in self.role.text:
+                choice_1 = input(f"Choose a player: {set(alive_players).difference(self.name)} ")
+                choice_2 = input(f"Choose a player: {set(alive_players).difference(self.name).difference(choice_1)} ")
+                print(self.name + " chose " + choice_1 + " and " + choice_2)                
 
     def __str__(self) -> str:
         return f"Player: {self.name} | {self.role.__str__()} | Alignment: {self.alignment} | Status: {'Alive' if self.is_alive() else 'Dead'} | DeadVote: {'Saved' if self.has_vote() else 'Used'}"
