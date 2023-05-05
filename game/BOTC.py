@@ -4,6 +4,14 @@ import pygame
 import time
 
 class Townsfolk():
+    """Object class for Townsfolk roles in BOTC
+        - reads Townsfolks.csv and adds all rows to a dictionary mapping the type of role to its ability
+    Raises:
+        TypeError: this is definitely not implemented correctly...
+
+    Returns:
+        Townsfolk: A faction in blood on the clocktower, usually of good alignment besides edge cases.
+    """
     types = {}
     with open("data/Townsfolks.csv") as ofile:
         for line in ofile:
@@ -25,6 +33,14 @@ class Townsfolk():
         return f"Role: {self.type[0].upper()+self.type[1:]}"
         
 class Outsider():
+    """Object class for Outsider roles in BOTC
+        - reads Outsiders.csv and adds all rows to a dictionary mapping the type of role to its ability
+    Raises:
+        TypeError: this is definitely not implemented correctly...
+
+    Returns:
+        Outsider: A faction in blood on the clocktower, usually of good alignment besides edge cases.
+    """    
     types = {}
     with open("data/Outsiders.csv") as ofile:
         for line in ofile:
@@ -46,6 +62,14 @@ class Outsider():
         return f"Role: {self.type[0].upper()+self.type[1:]}"
         
 class Minion():
+    """Object class for Minion roles in BOTC
+        - reads Minions.csv and adds all rows to a dictionary mapping the type of role to its ability
+    Raises:
+        TypeError: this is definitely not implemented correctly...
+
+    Returns:
+        Minion: A faction in blood on the clocktower, usually of evil alignment besides edge cases.
+    """   
     types = {}
     with open("data/Minions.csv") as ofile:
         for line in ofile:
@@ -67,6 +91,14 @@ class Minion():
         return f"Role: {self.type[0].upper()+self.type[1:]}"
         
 class Demon():
+    """Object class for Demon roles in BOTC
+        - reads Demons.csv and adds all rows to a dictionary mapping the type of role to its ability
+    Raises:
+        TypeError: this is definitely not implemented correctly...
+
+    Returns:
+        Demon: A faction in blood on the clocktower, usually of evil alignment besides edge cases.
+    """
     types = {}
     with open("data/Demons.csv") as ofile:
         for line in ofile:
@@ -88,6 +120,15 @@ class Demon():
         return f"Role: {self.type[0].upper()+self.type[1:]}"
         
 class Traveler():
+    """Object class for Traveler roles in BOTC
+        - reads Travelers.csv and adds all rows to a dictionary mapping the type of role to its ability
+    Raises:
+        TypeError: this is definitely not implemented correctly...
+
+    Returns:
+        Traveler: A faction in blood on the clocktower, can be good or bad at the Storyteller's discretion, not exactly 
+        the same as a regular player in BOTC, more of a visiting player that can be removed at any time by anyone's whim.
+    """
     types = {}
     with open("data/Travelers.csv") as ofile:
         for line in ofile:
@@ -107,6 +148,9 @@ class Traveler():
             raise TypeError
         
 class Player():
+    """
+        Object class for players of the Blood on the Clocktower game
+    """
     def __init__(self, name:str, alignment:str, role, drunk_role:str) -> None:
         self.name = name
         self.alignment = alignment
@@ -158,6 +202,9 @@ class Player():
         
     def is_poisoned(self) -> bool:
         return self.poisoned
+    
+    def choose(self, choice_1 = None, choice_2 = None, choice_3 = None):
+        pass
     
     def wake_up(self, game, first=False):
         print("Wake up " + self.__str__())
