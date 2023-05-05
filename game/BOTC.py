@@ -1,11 +1,12 @@
 import json
 import random
+import pygame
 import time
 
 class Townsfolk():
     types = {}
-    with open("../data/Townsfolks.csv") as file:
-        for line in file:
+    with open("data/Townsfolks.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -25,8 +26,8 @@ class Townsfolk():
         
 class Outsider():
     types = {}
-    with open("../data/Outsiders.csv") as file:
-        for line in file:
+    with open("data/Outsiders.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -46,8 +47,8 @@ class Outsider():
         
 class Minion():
     types = {}
-    with open("../data/Minions.csv") as file:
-        for line in file:
+    with open("data/Minions.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -67,8 +68,8 @@ class Minion():
         
 class Demon():
     types = {}
-    with open("../data/Demons.csv") as file:
-        for line in file:
+    with open("data/Demons.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -88,8 +89,8 @@ class Demon():
         
 class Traveler():
     types = {}
-    with open("../data/Travelers.csv") as file:
-        for line in file:
+    with open("data/Travelers.csv") as ofile:
+        for line in ofile:
             sline = line.strip().split(",")
             if sline[0] == "Role":
                 pass
@@ -158,16 +159,42 @@ class Player():
     def is_poisoned(self) -> bool:
         return self.poisoned
     
-    def wake_up(self, game):
+    def wake_up(self, game, first=False):
         print("Wake up " + self.__str__())
         players:list = game.name_list
         alive_players = []
+        demon_list = []
+        minion_list = []
         for name in players:
             if game.player_map[name].is_alive():
                 alive_players.append(name)
-        if "choose a player":
-            pass
-        pass
+            if game.player_map[name].role.type in Demon.types:
+                demon_list.append(game.player_map[name])
+            elif game.player_map[name].role.type in Minion.types:
+                minion_list.append(game.player_map[name])
+        if(first):
+            if(self.role.type in Demon.types):
+                print("These are your minions:")
+                for minion in minion_list:
+                    print(minion.name)
+            elif(self.role.type in Minion.types):
+                print("This is your demon:")
+                print(demon_list[0].name)
+        else:
+            if "choose a player" in self.role.text and "*" not in self.role.text:
+                choice = input(f"Choose a player: {set(players)} ")
+                print(self.name + " chose " + choice)
+            elif "choose 2 players" in self.role.text and "*" not in self.role.text:
+                choice_1 = input(f"Choose a player: {set(players)} ")
+                choice_2 = input(f"Choose a player: {set(players).difference(choice_1)} ")
+                print(self.name + " chose " + choice_1 + " and " + choice_2)
+            elif "choose an alive player" in self.role.text and "*" not in self.role.text:
+                choice = input(f"Choose an alive player: {set(alive_players)} ")
+                print(self.name + " chose " + choice)
+            elif "choose 2 alive players" in self.role.text and "*" not in self.role.text:
+                choice_1 = input(f"Choose a player: {set(alive_players).difference(self.name)} ")
+                choice_2 = input(f"Choose a player: {set(alive_players).difference(self.name).difference(choice_1)} ")
+                print(self.name + " chose " + choice_1 + " and " + choice_2)                
 
     def __str__(self) -> str:
         return f"Player: {self.name} | {self.role.__str__()} | Alignment: {self.alignment} | Status: {'Alive' if self.is_alive() else 'Dead'} | DeadVote: {'Saved' if self.has_vote() else 'Used'}"
@@ -292,10 +319,23 @@ class Game():
             players.remove(players[j])
     
     def night_1(self):
+        self.night = 1
+        print("---Night 1---")
         for role in self.first_night_order:
             if role in self.active_roles:
                 player = self.role_map[role]
                 self.player_map[player].wake_up(self)
+            elif role == "MINION_INFO":
+                for r in self.active_roles:
+                    if r in Minion.types:
+                        player = self.role_map[r]
+                        self.player_map[player].wake_up(self, True)
+            elif role == "DEMON_INFO":
+                for r in self.active_roles:
+                    if r in Demon.types:
+                        player = self.role_map[r]
+                        self.player_map[player].wake_up(self, True)
+                
 
     def play_day(self):
         t = 60 * int(input("How long is the day? (enter int in minutes)"))
@@ -313,6 +353,8 @@ class Game():
         self.other_nights()
 
     def other_nights(self):
+        self.night+=1
+        print(f"---Night {self.night}---")
         for role in self.other_night_order:
             if role in self.active_roles:
                 player = self.role_map[role]
