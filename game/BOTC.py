@@ -1,9 +1,10 @@
 import json
 import random
+import time
 
 class Townsfolk():
     types = {}
-    with open("data/Townsfolks.csv") as file:
+    with open("../data/Townsfolks.csv") as file:
         for line in file:
             sline = line.strip().split(",")
             if sline[0] == "Role":
@@ -24,7 +25,7 @@ class Townsfolk():
         
 class Outsider():
     types = {}
-    with open("data/Outsiders.csv") as file:
+    with open("../data/Outsiders.csv") as file:
         for line in file:
             sline = line.strip().split(",")
             if sline[0] == "Role":
@@ -45,7 +46,7 @@ class Outsider():
         
 class Minion():
     types = {}
-    with open("data/Minions.csv") as file:
+    with open("../data/Minions.csv") as file:
         for line in file:
             sline = line.strip().split(",")
             if sline[0] == "Role":
@@ -66,7 +67,7 @@ class Minion():
         
 class Demon():
     types = {}
-    with open("data/Demons.csv") as file:
+    with open("../data/Demons.csv") as file:
         for line in file:
             sline = line.strip().split(",")
             if sline[0] == "Role":
@@ -87,7 +88,7 @@ class Demon():
         
 class Traveler():
     types = {}
-    with open("data/Travelers.csv") as file:
+    with open("../data/Travelers.csv") as file:
         for line in file:
             sline = line.strip().split(",")
             if sline[0] == "Role":
@@ -176,8 +177,9 @@ class StoryTeller():
     def __init__(self, game) -> None:
         pass
 
+
 class Game():
-    team_map = {# player_count: (town, outsider, minion, demon)
+    team_map = {  # player_count: (town, outsider, minion, demon)
                 5: (3, 0, 1, 1),
                 6: (3, 1, 1, 1),
                 7: (5, 0, 1, 1),
@@ -200,7 +202,7 @@ class Game():
                     roles_list.append(i["id"])
         self.first_night_order = []
         self.other_night_order = []
-        with open("nightsheet.json") as file:
+        with open("../nightsheet.json") as file:
             orders = json.load(file)
             for i in orders["firstnight"]:
                 if i in roles_list or i == "MINION_INFO" or i == "DEMON_INFO" or i == "DAWN":
@@ -296,8 +298,19 @@ class Game():
                 self.player_map[player].wake_up(self)
 
     def play_day(self):
-        
-        pass
+        t = 60 * int(input("How long is the day? (enter int in minutes)"))
+        time.sleep(t)
+        self.nominations()
+
+
+    def nominations(self):
+        if "juggler" in self.script or "gossip" in self.script:
+            print("Now accepting juggles / public statements:")
+            time.sleep(80)
+        print("Now accepting nominations:")
+        # Code input for nominations and votes
+        print("Now beginning the night: ")
+        self.other_nights()
 
     def other_nights(self):
         for role in self.other_night_order:
@@ -316,14 +329,14 @@ def main():
             break
         else:
             player_list.append(player_name)
-    game = Game(player_list, "scripts/Sects and Violets.json")
+    game = Game(player_list, "../scripts/Sects and Violets.json")
     
     for player in game.player_list:
         print(player)
 
 def test():
         players = ["Logan", "Jason", "Ada", "Ata", "Joe", "Matt", "Emma", "Jeremy", "Darwin", "Dani", "Zach"]
-        game = Game(players, "scripts/Sects and Violets.json")
+        game = Game(players, "../scripts/Sects and Violets.json")
         game.night_1()
 
 if __name__ == "__main__":
